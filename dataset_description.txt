@@ -1,0 +1,14 @@
+total: 353115
+
+collection: 133290 cons 133290 pros 86534
+cons + 1 => 9544
+cons + 2 => 16524
+cons + 3 => 38897
+cons + 4 => 44112
+cons + 5 =>24213
+
+pros + 1 => 9544
+pros + 2 => 16524
+pros + 3 => 38897
+pros + 4 => 44112
+pros + 5 => 24213

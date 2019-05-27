@@ -20,7 +20,7 @@ def parse_args():
     parser.add_argument("--learning_rate", type=float, default=0.001)
     parser.add_argument("--word_embedding", type=str, default="GloVe")
     parser.add_argument("--rating_mode", type=int, choices = {2, 3, 5}, default=3, help="binary tenary or 5-star rating")
-
+    parser.add_argument("--rebalance", type=bool, default=False)
     args = parser.parse_args()
     return args
 

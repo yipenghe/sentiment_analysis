@@ -1,0 +1,238 @@
+This file records the result of the baseline results, 
+configurations:
+        test data: The first 10000 pros prompt and 10000 cons prompt in collections.glassdoor.csv
+        train data: Amazon, Mircosoft, Macys and Nordstrom training data,
+         training data are rebalanced for all labels, training data is skewed as most ratings range from 3-5
+        only basic preprocessing is performed, using simple count features as baselines
+        
+RUNNING EXPERIMENT FOR RATING LEVEL: 2
+Label distribution for test dataCounter({1.0: 8105, 0.0: 1895})
+Counter({1.0: 8021, 0.0: 1979})
+=======================================
+Using only pros data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.17      0.54      0.25       578
+         1.0       0.97      0.83      0.89      9422
+
+   micro avg       0.82      0.82      0.82     10000
+   macro avg       0.57      0.69      0.57     10000
+weighted avg       0.92      0.82      0.86     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         0.0       0.23      0.25      0.24      1794
+         1.0       0.83      0.81      0.82      8206
+
+   micro avg       0.71      0.71      0.71     10000
+   macro avg       0.53      0.53      0.53     10000
+weighted avg       0.72      0.71      0.72     10000
+
+=======================================
+Using only cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.05      0.20      0.08       453
+         1.0       0.96      0.81      0.88      9547
+
+   micro avg       0.78      0.78      0.78     10000
+   macro avg       0.50      0.50      0.48     10000
+weighted avg       0.91      0.78      0.84     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         0.0       0.38      0.56      0.45      1346
+         1.0       0.93      0.86      0.89      8654
+
+   micro avg       0.82      0.82      0.82     10000
+   macro avg       0.65      0.71      0.67     10000
+weighted avg       0.85      0.82      0.83     10000
+
+=======================================
+Using half pros half cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.05      0.44      0.09       203
+         1.0       0.99      0.82      0.89      9797
+
+   micro avg       0.81      0.81      0.81     10000
+   macro avg       0.52      0.63      0.49     10000
+weighted avg       0.97      0.81      0.88     10000
+
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.22      0.54      0.32       811
+         1.0       0.95      0.83      0.89      9189
+
+   micro avg       0.81      0.81      0.81     10000
+   macro avg       0.59      0.69      0.60     10000
+weighted avg       0.89      0.81      0.84     10000
+
+RUNNING EXPERIMENT FOR RATING LEVEL: 3
+Label distribution for test dataCounter({2.0: 5162, 1.0: 2943, 0.0: 1895})
+Counter({2.0: 5147, 1.0: 2874, 0.0: 1979})
+=======================================
+Using only pros data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.27      0.47      0.34      1080
+         1.0       0.11      0.35      0.17       945
+         2.0       0.88      0.57      0.69      7975
+
+   micro avg       0.54      0.54      0.54     10000
+   macro avg       0.42      0.46      0.40     10000
+weighted avg       0.74      0.54      0.61     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         0.0       0.32      0.23      0.27      2693
+         1.0       0.16      0.29      0.21      1639
+         2.0       0.57      0.52      0.54      5668
+
+   micro avg       0.40      0.40      0.40     10000
+   macro avg       0.35      0.35      0.34     10000
+weighted avg       0.44      0.40      0.41     10000
+
+=======================================
+Using only cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.04      0.20      0.06       364
+         1.0       0.07      0.25      0.11       808
+         2.0       0.87      0.51      0.64      8828
+
+   micro avg       0.47      0.47      0.47     10000
+   macro avg       0.32      0.32      0.27     10000
+weighted avg       0.77      0.47      0.58     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         0.0       0.34      0.52      0.41      1275
+         1.0       0.19      0.35      0.24      1522
+         2.0       0.87      0.62      0.72      7203
+
+   micro avg       0.57      0.57      0.57     10000
+   macro avg       0.46      0.50      0.46     10000
+weighted avg       0.70      0.57      0.61     10000
+
+=======================================
+Using half pros half cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.11      0.39      0.17       541
+         1.0       0.07      0.35      0.11       570
+         2.0       0.92      0.54      0.68      8889
+
+   micro avg       0.52      0.52      0.52     10000
+   macro avg       0.37      0.42      0.32     10000
+weighted avg       0.83      0.52      0.62     10000
+
+pros test result:
+              precision    recall  f1-score   support
+
+         0.0       0.33      0.48      0.39      1338
+         1.0       0.11      0.32      0.17       995
+         2.0       0.88      0.59      0.71      7667
+
+   micro avg       0.55      0.55      0.55     10000
+   macro avg       0.44      0.47      0.42     10000
+weighted avg       0.73      0.55      0.61     10000
+
+RUNNING EXPERIMENT FOR RATING LEVEL: 5
+Label distribution for test dataCounter({4.0: 3329, 3.0: 2943, 5.0: 1833, 2.0: 1224, 1.0: 671})
+Counter({4.0: 3297, 3.0: 2874, 5.0: 1850, 2.0: 1240, 1.0: 739})
+=======================================
+Using only pros data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         1.0       0.28      0.29      0.28       642
+         2.0       0.07      0.19      0.10       420
+         3.0       0.18      0.34      0.24      1575
+         4.0       0.44      0.35      0.39      4158
+         5.0       0.47      0.27      0.34      3205
+
+   micro avg       0.31      0.31      0.31     10000
+   macro avg       0.29      0.29      0.27     10000
+weighted avg       0.38      0.31      0.33     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         1.0       0.24      0.10      0.14      1761
+         2.0       0.06      0.12      0.08       586
+         3.0       0.20      0.28      0.23      2023
+         4.0       0.39      0.35      0.37      3613
+         5.0       0.17      0.16      0.17      2017
+
+   micro avg       0.24      0.24      0.24     10000
+   macro avg       0.21      0.20      0.20     10000
+weighted avg       0.26      0.24      0.24     10000
+
+=======================================
+Using only cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         1.0       0.05      0.07      0.06       440
+         2.0       0.00      0.08      0.01        52
+         3.0       0.21      0.27      0.24      2214
+         4.0       0.34      0.32      0.33      3579
+         5.0       0.36      0.18      0.24      3715
+
+   micro avg       0.25      0.25      0.25     10000
+   macro avg       0.19      0.18      0.17     10000
+weighted avg       0.31      0.25      0.26     10000
+
+cons test result:
+              precision    recall  f1-score   support
+
+         1.0       0.33      0.25      0.29       980
+         2.0       0.01      0.26      0.03        65
+         3.0       0.34      0.36      0.35      2770
+         4.0       0.42      0.40      0.41      3462
+         5.0       0.49      0.33      0.39      2723
+
+   micro avg       0.35      0.35      0.35     10000
+   macro avg       0.32      0.32      0.29     10000
+weighted avg       0.41      0.35      0.37     10000
+
+=======================================
+Using half pros half cons data to train a model
+pros test result:
+              precision    recall  f1-score   support
+
+         1.0       0.11      0.23      0.15       329
+         2.0       0.04      0.19      0.07       270
+         3.0       0.18      0.32      0.23      1631
+         4.0       0.36      0.35      0.36      3393
+         5.0       0.57      0.24      0.34      4377
+
+   micro avg       0.29      0.29      0.29     10000
+   macro avg       0.25      0.27      0.23     10000
+weighted avg       0.40      0.29      0.31     10000
+
+pros test result:
+              precision    recall  f1-score   support
+
+         1.0       0.23      0.24      0.23       703
+         2.0       0.09      0.22      0.12       472
+         3.0       0.29      0.34      0.31      2425
+         4.0       0.32      0.36      0.34      2916
+         5.0       0.54      0.29      0.38      3484
+
+   micro avg       0.32      0.32      0.32     10000
+   macro avg       0.29      0.29      0.28     10000
+weighted avg       0.37      0.32      0.33     10000
+
