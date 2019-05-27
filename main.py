@@ -9,7 +9,7 @@ from sklearn.metrics import classification_report
 from configs import system_configs
 from imblearn.over_sampling import RandomOverSampler
 from collections import Counter
-
+from utils.dataLoaders import clean_str
 
 #configs of the experiment
 ID            = system_configs.ID #name of experiment
@@ -52,7 +52,7 @@ def baseline():
             print("using only pros data to train a model")
             f.write("=======================================\n")
             f.write("Using only pros data to train a model\n")
-            X, y = load_glassdoor("all", "train", rating_mode, "pros", labelType = "sa", rebalance = True)
+            X, y = load_glassdoor("all", "train", rating_mode, "pros", labelType = "sa")
             #print(sum(y))
             #print(sum(test_y))
             vectorizer =CountVectorizer()
@@ -79,7 +79,7 @@ def baseline():
             print("using only cons data to train a model")
             f.write("=======================================\n")
             f.write("Using only cons data to train a model\n")
-            X, y = load_glassdoor("all", "train", rating_mode, "cons", labelType = "sa", rebalance = True)
+            X, y = load_glassdoor("all", "train", rating_mode, "cons", labelType = "sa")
             vectorizer =CountVectorizer()
             encoded_X = vectorizer.fit_transform(X).toarray()
             test_X_pros_encoded = vectorizer.transform(test_pros_X).toarray()
@@ -104,7 +104,7 @@ def baseline():
             print("using half pros half cons data to train a model")
             f.write("=======================================\n")
             f.write("Using half pros half cons data to train a model\n")
-            X, y = load_glassdoor("Amazon_Microsoft", "train", rating_mode, "pros_cons", labelType = "sa", rebalance = True)
+            X, y = load_glassdoor("Amazon_Microsoft", "train", rating_mode, "pros_cons", labelType = "sa")
             vectorizer =CountVectorizer()
             encoded_X = vectorizer.fit_transform(X).toarray()
             test_X_pros_encoded = vectorizer.transform(test_pros_X).toarray()
@@ -125,15 +125,36 @@ def baseline():
             f.write("pros test result:\n")
             f.write(report_cons+"\n")
 
+def baseline_pros_cons():
+    test_data = "  Its a huge group, so many opportunities to move around within the company. I don't have anything negative to say. The company does diverse work so it can be good.\
+      Salary is slightly below industry, you're on the bench - you're gone, HR is slow.   Good Salary, Extremely client oriented, competitive. "
+    X, y = load_glassdoor("all","train", 2, "pros", labelType="pros_cons")
+    test_X = test_data.split(".")
+    for i, x in enumerate(test_X):
+        test_X[i] = clean_str(x)
+    test_X = test_X[:-1]
+    for a in test_X:
+        print(a)
+    test_y = [1, 1, 0, 0]
+    vectorizer =CountVectorizer()
+    encoded_X = vectorizer.fit_transform(X).toarray()
+    test_X_encoded = vectorizer.transform(test_X).toarray()
+    clf = SGDClassifier(max_iter=1000, tol=1e-3)
+    clf.fit(encoded_X, y)
+    print(clf.predict(test_X_encoded))
 
 def main():
     #baseline()
-    X, y = load_glassdoor("collections","train", 2, "pros", labelType="sa")
-    print(len(X))
-    with open("pros_from_collection", "w", encoding="utf-8") as f:
-        for text in X:
-            f.write(text+"\n")
-
-
+    X, y = load_glassdoor("all","train", 2, "pros", labelType="pros_cons")
+    test_X, test_y = load_glassdoor("collections", "train", 2, "pros", labelType = "pros_cons", restrict = 20000)
+    print(Counter(test_y))
+    vectorizer =CountVectorizer()
+    encoded_X = vectorizer.fit_transform(X).toarray()
+    test_X_encoded = vectorizer.transform(test_X).toarray()
+    clf = SGDClassifier(max_iter=1000, tol=1e-3)
+    clf.fit(encoded_X, y)
+    report_pros = classification_report(clf.predict(test_X_encoded), test_y)
+    print(report_pros)
 if __name__ == "__main__":
-    main()
+    #main()
+    baseline_pros_cons()

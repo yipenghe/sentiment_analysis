@@ -25,7 +25,7 @@ def clean_str(string):
   return string.strip().lower()
 
 
-def load_glassdoor(datasets="all", mode="train", rating=5, typeOfReview="pros_cons", labelType="sa",pros_cons_split=0.8, rebalance = False):
+def load_glassdoor(datasets="all", mode="train", rating=5, typeOfReview="pros_cons", labelType="sa",pros_cons_split=0.5, restrict= 0):
     """
     params:
         datasets(str): a string of form "Amazon_Microsoft",
@@ -112,13 +112,14 @@ def load_glassdoor(datasets="all", mode="train", rating=5, typeOfReview="pros_co
                 list_text = list(df["text"])
                 for index, prompt in enumerate(list_prompt):
                     if prompt == "pros":
-                        X.append(list_text[index])
+                        X.append(clean_str(list_text[index]))
                         y.append(1)
                     elif prompt == "cons":
-                        X.append(list_text[index])
+                        X.append(clean_str(list_text[index]))
                         y.append(0)
+                    if restrict > 0 and len(X) >= restrict:
                     #if len(X) >= 10000:
-                    #    break
+                        break
             else:
                 csv_name = data_path +dataset+".glassdoor.csv"
                 df = pd.read_csv(csv_name, usecols=["pros", "cons"])
@@ -126,11 +127,13 @@ def load_glassdoor(datasets="all", mode="train", rating=5, typeOfReview="pros_co
                 total_data = len(list_pros)
                 num_of_pros = int(total_data*pros_cons_split)
                 num_of_cons = int(total_data - num_of_pros)
-                X.extend(list_pros[:num_of_pros])
-                y.extend([1]*num_of_pros)
+                for example in list_pros[:num_of_pros]:
+                    X.append(clean_str(example))
+                    y.append(1)
                 list_cons = list(df["cons"])[:num_of_cons]
-                X.extend(list_cons)
-                y.extend([0]*num_of_cons)
+                for example in list_cons[:num_of_cons]:
+                    X.append(clean_str(example))
+                    y.append(0)
     #if (rebalance):
      ##   ros = RandomOverSampler(random_state = 42)
        ##X, y = ros.fit_resample(X, y)
