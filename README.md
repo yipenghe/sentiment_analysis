@@ -16,5 +16,6 @@ project
 │       │   Macys.glassdoor.csv
 │       │   Microsoft.glassdoor.csv
         │   Nordstrom.glassdoor.csv
+        │   collections.glassdoor.csv (renamed the sample csv for unified interface)
 
 ```
