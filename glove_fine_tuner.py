@@ -27,7 +27,7 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
     print("reading training file")
     docs = read_doc(doc_name)
     #create coocurrence matrix
-    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=False)
+    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=True)
     Xc = coocur_model.fit_transform(docs) # co-occurrence matrix
     Xc = np.squeeze(np.asarray(Xc.todense()))
     #read public GloVe embedding
@@ -53,14 +53,14 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
             f.write("\n")
 
     with open(ID+"_"+train_type+"_vocab.tsv", "w") as f2:
-        for word in ordered_word_list:
+        for word in vocab:
             f2.write(word+"\n")
 
     #storing it in a way for the common glove readers
     #this should be ready to be read by simple_glove2dict above
     # and glove2dict function in /utils/vec_function
     with open(ID+"_"+train_type+"_word2vectorGloVe."+str(glove_dim)+"d.txt", "w") as f3:
-        for index, word in enumerate(ordered_word_list):
+        for index, word in enumerate(vocab):
             f3.write(word+" ")
             for number in new_embeddings[index]:
                 f3.write(str(number) + " ")
