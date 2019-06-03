@@ -24,4 +24,6 @@ def main():
     dim=system_configs.dim
     print(ID, train_type, doc_path, glove_path, iteration, dim)
     fine_tune_glove(ID = ID, train_type=train_type, doc_name = doc_path, glove_file = glove_path, iteration = iteration, glove_dim = dim)
-    print(finished)
+    print("finished")
+
+main()

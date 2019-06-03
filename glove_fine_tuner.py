@@ -47,20 +47,20 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
 
     print("training finished")
     #storing it in a way that can be used at https://projector.tensorflow.org/
-    with open(ID+"_"+train_type+"_embedding.tsv", "w") as f:
+    with open("result/"+ID+"_"+train_type+"_"+str(iteration)+"_embedding.tsv", "w") as f:
           for array in new_embeddings:
             for number in array:
               f.write(str(number)+"\t")
             f.write("\n")
 
-    with open(ID+"_"+train_type+"_vocab.tsv", "w") as f2:
+    with open("result/"+ID+"_"+train_type+"_"+str(iteration)+"_vocab.tsv", "w") as f2:
         for word in vocab:
             f2.write(word+"\n")
 
     #storing it in a way for the common glove readers
     #this should be ready to be read by simple_glove2dict above
     # and glove2dict function in /utils/vec_function
-    with open(ID+"_"+train_type+"_word2vectorGloVe."+str(glove_dim)+"d.txt", "w") as f3:
+    with open("result/"+ID+"_"+train_type+"_"+str(iteration)+"_word2vectorGloVe."+str(glove_dim)+"d.txt", "w") as f3:
         for index, word in enumerate(vocab):
             f3.write(word+" ")
             for number in new_embeddings[index]:
