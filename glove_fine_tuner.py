@@ -9,7 +9,7 @@ from utils.fine_tuner_utils import Cooccurrence, read_doc, simple_glove2dict, cr
 Wrapper for fine tuning glove with glassdoor data
 """
 
-def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0):
+def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0, normal=True):
     """
     The wrapper function for fine tuning GloVe
     ID: identifier for the experiment
@@ -19,6 +19,7 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
     iteration: how many iteration to train
     glove_dim: dimension for glove embedding
     restrict: restrict the number of documents to be read, reads all if restrict is 0
+    normal: whether to normalize the coocurrence matrix or not
 
     return: nothing, saves embedding in three files
     """
@@ -27,7 +28,7 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
     print("reading training file")
     docs = read_doc(doc_name)
     #create coocurrence matrix
-    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=True)
+    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=normal)
     Xc = coocur_model.fit_transform(docs) # co-occurrence matrix
     Xc = np.squeeze(np.asarray(Xc.todense()))
     #read public GloVe embedding
@@ -44,7 +45,7 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
     print("training started")
     new_embeddings = mittens_model.fit(Xc, vocab=vocab, initial_embedding_dict= original_embedding)
 
-
+    print("training finished")
     #storing it in a way that can be used at https://projector.tensorflow.org/
     with open(ID+"_"+train_type+"_embedding.tsv", "w") as f:
           for array in new_embeddings:
@@ -65,4 +66,4 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
             for number in new_embeddings[index]:
                 f3.write(str(number) + " ")
             f3.write("\n")
-
+    print("file written")

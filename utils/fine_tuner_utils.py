@@ -85,6 +85,7 @@ def read_doc(doc_name="pros_from_collection", restrict=0):
       lines = f.readlines()
       if restrict:
         lines=lines[:restrict]
+    print("A total of ", len(lines), " reviews")
       for text in lines:
         docs.append(text)
     return docs
