@@ -8,8 +8,18 @@ from utils.fine_tuner_utils import Cooccurrence, read_doc, simple_glove2dict, cr
 """
 Wrapper for fine tuning glove with glassdoor data
 """
+def read_stop_word(stop_word_file):
+    """
+    stop word in this case means term frequency < 10, to shrink coocurrence matrix size
+    """
+    low_freq_list = set()
+    with open(stop_word_file) as stop_f:
+        words = stop_f.readlines()
+        for word in words:
+            low_freq_list.add(word.strip().strip("\n"))
+    return list(low_freq_list)
 
-def fine_tune_glove(ID, train_type ,doc_name="data/fine_tune_docs/pros_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0, normal=True):
+def fine_tune_glove(ID, train_type ,doc_name="data/fine_tune_docs/pro_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0, normal=True, stop_word_list='english'):
     """
     The wrapper function for fine tuning GloVe
     ID: identifier for the experiment
@@ -28,7 +38,10 @@ def fine_tune_glove(ID, train_type ,doc_name="data/fine_tune_docs/pros_from_coll
     print("reading training file")
     docs = read_doc(doc_name, restrict=restrict)
     #create coocurrence matrix
-    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=normal)
+    if stop_word_list != 'english':
+        stop_word_file = "data/fine_tune_docs/"+train_type+"_stop_words"
+        stop_word_list = read_stop_word(stop_word_file)
+    coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words=stop_word_list, normalize=normal)
     Xc = coocur_model.fit_transform(docs) # co-occurrence matrix
     Xc = np.squeeze(np.asarray(Xc.todense()))
     print(Xc.shape)
@@ -38,7 +51,7 @@ def fine_tune_glove(ID, train_type ,doc_name="data/fine_tune_docs/pros_from_coll
     #create vocab
     print("creating vocabulary")
     vocab = create_word_list(coocur_model.vocabulary_)
-
+    print("vocab_size:", len(vocab))
     #prepare for fine tune
     mittens_model = Mittens(n=glove_dim, max_iter=iteration)
 
