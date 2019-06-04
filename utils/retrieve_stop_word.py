@@ -44,7 +44,7 @@ def read_doc(path, term_freq=10):
 
 def replace_with_lemma(path, file_type, high_freq_set, lemma_dict, stop_word_set):
     with open(path) as f:
-        with open("data/fine_tune_docs/"+file_type + "_lemma_processed_doc", "w") as lemma_file:
+        with open("../data/fine_tune_docs/"+file_type + "_lemma_processed_doc", "w") as lemma_file:
             lines = f.readlines()
             for line in lines:
                 splitted = line.strip().strip("\n").split()
@@ -60,9 +60,9 @@ def replace_with_lemma(path, file_type, high_freq_set, lemma_dict, stop_word_set
         for stop_word in stop_word_set:
             f.write(stop_word+"\n")
         #print(doc.sentences[0].words[0].lemma)
-freq, lemma, stop = read_doc("../data/fine_tune_docs/pros_from_collection")
-replace_with_lemma("../data/fine_tune_docs/pros_from_collection", "pro", freq, lemma, stop)
-freq, lemma, stop = read_doc("../data/fine_tune_docs/data/fine_tune_docs/cons_from_collection")
-replace_with_lemma("../data/fine_tune_docs/cons_from_collection", "con", freq, lemma, stop)
+freq, lemma, stop = read_doc("../data/fine_tune_docs/pro_from_collection")
+replace_with_lemma("../data/fine_tune_docs/pro_from_collection", "pro", freq, lemma, stop)
+freq, lemma, stop = read_doc("../data/fine_tune_docs/con_from_collection")
+replace_with_lemma("../data/fine_tune_docs/con_from_collection", "con", freq, lemma, stop)
 freq, lemma, stop = read_doc("../data/fine_tune_docs/all_from_collection")
 replace_with_lemma("../data/fine_tune_docs/all_from_collection", "all", freq, lemma, stop)
