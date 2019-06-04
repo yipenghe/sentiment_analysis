@@ -44,7 +44,7 @@ def read_doc(path, term_freq=10):
 
 def replace_with_lemma(path, file_type, high_freq_set, lemma_dict, stop_word_set):
     with open(path) as f:
-        with open(file_type + "_lemma_processed_doc", "w") as lemma_file:
+        with open("../data/fine_tune_docs/"+file_type + "_lemma_processed_doc", "w") as lemma_file:
             lines = f.readlines()
             for line in lines:
                 splitted = line.strip().strip("\n").split()
@@ -56,7 +56,7 @@ def replace_with_lemma(path, file_type, high_freq_set, lemma_dict, stop_word_set
                         splitted[index] = lemma_dict[word]
                 new_line = " ".join(splitted)
                 lemma_file.write(new_line+'\n')
-    with open(file_type+"_stop_words", "w") as f:
+    with open("../data/fine_tune_docs/"+file_type+"_stop_words", "w") as f:
         for stop_word in stop_word_set:
             f.write(stop_word+"\n")
         #print(doc.sentences[0].words[0].lemma)
