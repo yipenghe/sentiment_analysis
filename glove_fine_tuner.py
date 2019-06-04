@@ -26,11 +26,12 @@ def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file=
     assert(train_type in ["pro", "con", "all"])
     #read sentences
     print("reading training file")
-    docs = read_doc(doc_name)
+    docs = read_doc(doc_name, restrict=restrict)
     #create coocurrence matrix
     coocur_model = Cooccurrence(ngram_range=(1, 1), stop_words='english', normalize=normal)
     Xc = coocur_model.fit_transform(docs) # co-occurrence matrix
     Xc = np.squeeze(np.asarray(Xc.todense()))
+    print(Xc.shape)
     #read public GloVe embedding
     print("reading glove original embedding")
     original_embedding = simple_glove2dict(glove_file)
