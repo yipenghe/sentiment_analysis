@@ -9,6 +9,13 @@ project
 │
 └───data
 │   │
+│   │
+│   │───fine_tune_docs
+│   │   │
+│   │   │ *_from_collection
+│   │   │ *_lemma_processed_doc
+│   │   │ *_stop_words
+│   │
 │   └───glove.6B (same as cs224U github data/glove.6B)
 │   │   │ glove.6B.*d.txt
 │   │

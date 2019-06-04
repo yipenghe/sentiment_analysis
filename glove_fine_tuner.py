@@ -9,7 +9,7 @@ from utils.fine_tuner_utils import Cooccurrence, read_doc, simple_glove2dict, cr
 Wrapper for fine tuning glove with glassdoor data
 """
 
-def fine_tune_glove(ID, train_type ,doc_name="pros_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0, normal=True):
+def fine_tune_glove(ID, train_type ,doc_name="data/lemma_docs/pros_from_collection", glove_file="glove.6B.50d.txt", iteration = 2000, glove_dim = 50, restrict=0, normal=True):
     """
     The wrapper function for fine tuning GloVe
     ID: identifier for the experiment
