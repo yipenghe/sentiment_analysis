@@ -25,4 +25,5 @@ a = set(stopwords.words('english'))
 total_stop_word = []
 for word in a:
     total_stop_word.extend(clean_str(word).split(" "))
-print(total_stop_word)
+for word in set(total_stop_word):
+    print(word)
