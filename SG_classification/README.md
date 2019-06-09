@@ -18,8 +18,9 @@ Also you should follow library requirements specified in the **requirements.txt*
     gensim==2.3.0
     scikit_learn==0.19.0
 
-
 ## Execution
+Please note that we don't upload the Glassdoor data set. If you would like to run the experiments, please ask me for the data.
+
 
 > python run.py --help
 
@@ -32,7 +33,7 @@ Also you should follow library requirements specified in the **requirements.txt*
 	optional arguments:
 	  -h, --help            show this help message and exit
 	  --mode MODE           train, test
-	  --model MODEL         available models: rand, static (fixed glove), non-static(updating glove)
+	  --model MODEL         available models: rand, static (fixed glove), non-static(updating glove), pros_cons (pros/cons embeddings)
 	  --dataset DATASET     available datasets: GLASSDOOR, MR, TREC
 	  --save_model          whether saving model or not
 	  --early_stopping      whether to apply early stopping by checking f1
@@ -45,6 +46,6 @@ Also you should follow library requirements specified in the **requirements.txt*
  
 ## Quick Start:
 
->train: python run.py --model static --dataset GLASSDOOR --gpu 0 --mode train
+>train: python run.py --model pros_cons --dataset GLASSDOOR --gpu 0 --mode train
 
->test: python run.py --model static --dataset GLASSDOOR --gpu 0 --mode test
+>test: python run.py --model pros_cons --dataset GLASSDOOR --gpu 0 --mode test
