@@ -20,6 +20,7 @@ Also you should follow library requirements specified in the **requirements.txt*
 
 
 ## Execution
+Please note that we don't upload the Glassdoor data set. If you would like to run the experiments, please ask me for the data.
 
 > python run.py --help
 
