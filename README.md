@@ -1,7 +1,7 @@
 # Improving Sentiment Classification with Pro/Con Structure of Reviews
 This is a course project for CS224U by Di Bai and Yipeng He.
 
-file_structure for data folder (not uploaded since files are large). Since we haven't provided the dataset we use, please let us know if you would like to ask for the data to run our experiments.
+file_structure for data folder (not uploaded because files are large). Since we haven't provided the dataset we use, please let us know if you would like to ask for the data to run our experiments.
 ```
 project
 │   README.md
