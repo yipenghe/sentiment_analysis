@@ -2,7 +2,8 @@
 This is a course project for CS224U by Di Bai and Yipeng He.
 
 We explored the usage of Pros and Cons structure of reviews, aiming to improve the sentiment classification task. We fine tuned GloVe embedding(https://nlp.stanford.edu/projects/glove/). We release the word embeddings we fine tuned here(https://drive.google.com/drive/u/0/my-drive), please read the readMe.txt inside the folder for usage.
-File_structure for data folder (not uploaded because files are large).The dataset we used is also not released. Since we haven't provided the dataset we use, please let us know if you would like to ask for the data to run our experiments.
+
+Below is the file_structure for data folder (not uploaded because files are large and data aren't publicly released). Unfortunately the dataset we used is also not publicly released. If you would like to use our code, please take a look at utils/dataLoader.py file, this script is used load the csv files containing reviews. You need to have header "pros", "cons", "overall_rating" in your csv file to use the code, or you can modify the code for your own needs.
 ```
 project
 │   README.md
