@@ -3,7 +3,7 @@
 
 This is the implementation of [Convolutional Neural Networks for Sentence Classification (Y.Kim, EMNLP 2014)](http://www.aclweb.org/anthology/D14-1181) on **Pytorch**.
 
-We modified it to train and test Glassdoor sentiment prediction task with our SG embeddings.
+We modified it to train and test on Glassdoor sentiment prediction task with our SG embeddings.
  
 ## Development Environment
 - OS: Ubuntu 16.04 LTS (64bit)
